@@ -84,10 +84,10 @@
     "classnames": "^2.2.5",
     "element-class": "^0.2.2",
     "lodash": "^4.16.1",
-    "react-addons-update": "^0.14.0 || ~15.3.0",
+    "react-addons-update": "^0.14.0 || ~15.3.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ~15.3.0",
-    "react-dom": "^0.14.0 || ~15.3.0",
+    "react-dom": "^0.14.0 || ~15.3.0"
   }
 }
