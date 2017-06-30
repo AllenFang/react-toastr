@@ -6,41 +6,20 @@ import ToastMessage from "./ToastMessage";
 
 export default class ToastContainer extends Component {
 
-  static propTypes = {
-    toastType: PropTypes.shape({
-      error: PropTypes.string,
-      info: PropTypes.string,
-      success: PropTypes.string,
-      warning: PropTypes.string,
-    }).isRequired,
-    id: PropTypes.string.isRequired,
-    toastMessageFactory: PropTypes.func.isRequired,
-    preventDuplicates: PropTypes.bool.isRequired,
-    newestOnTop: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-  };
 
-  static defaultProps = {
-    toastType: {
-      error: `error`,
-      info: `info`,
-      success: `success`,
-      warning: `warning`,
-    },
-    id: `toast-container`,
-    toastMessageFactory: React.createFactory(ToastMessage.animation),
-    preventDuplicates: true,
-    newestOnTop: true,
-    onClick() { },
-  };
+  constructor(props) {
 
-  state = {
-    toasts: [],
-    toastId: 0,
-    messageList: [],
-  };
+    super(props);
 
-  _handle_toast_remove = this._handle_toast_remove.bind(this);
+    this.state = {
+      toasts: [],
+      toastId: 0,
+      messageList: [],
+    };
+
+    this._handle_toast_remove = this._handle_toast_remove.bind(this);
+  }
+
 
   error(message, title, optionsOverride) {
     this._notify(this.props.toastType.error, message, title, optionsOverride);
@@ -142,3 +121,31 @@ export default class ToastContainer extends Component {
     );
   }
 }
+
+ToastContainer.propTypes = {
+  toastType: PropTypes.shape({
+    error: PropTypes.string,
+    info: PropTypes.string,
+    success: PropTypes.string,
+    warning: PropTypes.string,
+  }).isRequired,
+  id: PropTypes.string.isRequired,
+  toastMessageFactory: PropTypes.func.isRequired,
+  preventDuplicates: PropTypes.bool.isRequired,
+  newestOnTop: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+ToastContainer.defaultProps = {
+  toastType: {
+    error: `error`,
+    info: `info`,
+    success: `success`,
+    warning: `warning`,
+  },
+  id: `toast-container`,
+  toastMessageFactory: React.createFactory(ToastMessage.animation),
+  preventDuplicates: true,
+  newestOnTop: true,
+  onClick() { },
+};

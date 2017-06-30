@@ -10,9 +10,11 @@ import "./App.css";
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 export default class App extends Component {
-
-  addAlert = this.addAlert.bind(this);
-  clearAlert = this.clearAlert.bind(this);
+  constructor(props) {
+    super(props)
+    this.addAlert = this.addAlert.bind(this);
+    this.clearAlert = this.clearAlert.bind(this);
+  }
 
   addAlert() {
     this.refs.container.success(`hi! Now is ${new Date()}`, `Title`, {
