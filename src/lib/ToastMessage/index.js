@@ -1,24 +1,17 @@
-import {
-  default as React,
-} from "react";
+import React from "react";
 
 import {
   default as update,
 } from "react-addons-update";
 
-import {
-  default as classNames,
-} from "classnames";
+import classNames from "classnames";
 
-import {
-  default as animationMixin,
-} from "./animationMixin";
+import animationMixin from "./animationMixin";
 
-import {
-  default as jQueryMixin,
-} from "./jQueryMixin";
+import jQueryMixin from "./jQueryMixin";
+import createReactClass from 'create-react-class';
 
-function noop() {}
+function noop() { }
 
 const ToastMessageSpec = {
   displayName: `ToastMessage`,
@@ -102,12 +95,12 @@ const ToastMessageSpec = {
   },
 };
 
-export const animation = React.createClass(update(ToastMessageSpec, {
+export const animation = createReactClass(update(ToastMessageSpec, {
   displayName: { $set: `ToastMessage.animation` },
   mixins: { $set: [animationMixin] },
 }));
 
-export const jQuery = React.createClass(update(ToastMessageSpec, {
+export const jQuery = createReactClass(update(ToastMessageSpec, {
   displayName: { $set: `ToastMessage.jQuery` },
   mixins: { $set: [jQueryMixin] },
 }));
@@ -119,7 +112,7 @@ ToastMessageSpec.handleMouseEnter = noop;
 ToastMessageSpec.handleMouseLeave = noop;
 ToastMessageSpec.hideToast = noop;
 
-const ToastMessage = React.createClass(ToastMessageSpec);
+const ToastMessage = createReactClass(ToastMessageSpec);
 
 ToastMessage.animation = animation;
 ToastMessage.jQuery = jQuery;

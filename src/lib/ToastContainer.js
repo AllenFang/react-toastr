@@ -1,56 +1,25 @@
-import _ from "lodash";
-
-import {
-  default as React,
-  Component,
-  PropTypes,
-} from "react";
-
-import {
-  default as update,
-} from "react-addons-update";
-
-import {
-  default as ToastMessage,
-} from "./ToastMessage";
+import _, { merge } from "lodash";
+import React, { Component } from "react";
+import PropTypes from 'prop-types'
+import update from "react-addons-update";
+import ToastMessage from "./ToastMessage";
 
 export default class ToastContainer extends Component {
 
-  static propTypes = {
-    toastType: PropTypes.shape({
-      error: PropTypes.string,
-      info: PropTypes.string,
-      success: PropTypes.string,
-      warning: PropTypes.string,
-    }).isRequired,
-    id: PropTypes.string.isRequired,
-    toastMessageFactory: PropTypes.func.isRequired,
-    preventDuplicates: PropTypes.bool.isRequired,
-    newestOnTop: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-  };
 
-  static defaultProps = {
-    toastType: {
-      error: `error`,
-      info: `info`,
-      success: `success`,
-      warning: `warning`,
-    },
-    id: `toast-container`,
-    toastMessageFactory: React.createFactory(ToastMessage.animation),
-    preventDuplicates: true,
-    newestOnTop: true,
-    onClick() {},
-  };
+  constructor(props) {
 
-  state = {
-    toasts: [],
-    toastId: 0,
-    messageList: [],
-  };
+    super(props);
 
-  _handle_toast_remove = this._handle_toast_remove.bind(this);
+    this.state = {
+      toasts: [],
+      toastId: 0,
+      messageList: [],
+    };
+
+    this._handle_toast_remove = this._handle_toast_remove.bind(this);
+  }
+
 
   error(message, title, optionsOverride) {
     this._notify(this.props.toastType.error, message, title, optionsOverride);
@@ -124,15 +93,16 @@ export default class ToastContainer extends Component {
   }
 
   _handle_toast_remove(toastId) {
+    const newState = merge({}, this.state)
     if (this.props.preventDuplicates) {
-      this.state.previousMessage = ``;
+      newState.previousMessage = ``;
     }
     const operationName = `${this.props.newestOnTop ? `reduceRight` : `reduce`}`;
-    this.state.toasts[operationName]((found, toast, index) => {
+    newState.toasts[operationName]((found, toast, index) => {
       if (found || toast.toastId !== toastId) {
         return false;
       }
-      this.setState(update(this.state, {
+      this.setState(update(newState, {
         toasts: { $splice: [[index, 1]] },
         messageList: { $splice: [[index, 1]] },
       }));
@@ -151,3 +121,31 @@ export default class ToastContainer extends Component {
     );
   }
 }
+
+ToastContainer.propTypes = {
+  toastType: PropTypes.shape({
+    error: PropTypes.string,
+    info: PropTypes.string,
+    success: PropTypes.string,
+    warning: PropTypes.string,
+  }).isRequired,
+  id: PropTypes.string.isRequired,
+  toastMessageFactory: PropTypes.func.isRequired,
+  preventDuplicates: PropTypes.bool.isRequired,
+  newestOnTop: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+ToastContainer.defaultProps = {
+  toastType: {
+    error: `error`,
+    info: `info`,
+    success: `success`,
+    warning: `warning`,
+  },
+  id: `toast-container`,
+  toastMessageFactory: React.createFactory(ToastMessage.animation),
+  preventDuplicates: true,
+  newestOnTop: true,
+  onClick() { },
+};

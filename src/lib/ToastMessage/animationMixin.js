@@ -1,14 +1,8 @@
-import {
-  default as ReactTransitionEvents,
-} from "react/lib/ReactTransitionEvents";
+import ReactTransitionEvents from "react/lib/ReactTransitionEvents";
 
-import {
-  default as ReactDOM,
-} from "react-dom";
+import ReactDOM from "react-dom";
 
-import {
-  default as elementClass,
-} from "element-class";
+import elementClass from "element-class";
 
 const TICK = 17;
 const { toString } = Object.prototype;

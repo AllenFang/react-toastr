@@ -11,6 +11,8 @@
     "transform-flow-comments"
   ],
   "presets": [
+    "latest",
+    "stage-0",
     "react-app"
   ]
 }

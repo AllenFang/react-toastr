@@ -1,14 +1,8 @@
-import {
-  default as React,
-} from "react";
+import React from "react";
 
-import {
-  default as ReactDOM,
-} from "react-dom";
+import ReactDOM from "react-dom";
+import TestUtils from 'react-dom/test-utils'
 
-import {
-  default as TestUtils,
-} from "react-addons-test-utils";
 
 import {
   ToastContainer,
