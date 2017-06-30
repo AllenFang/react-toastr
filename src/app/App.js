@@ -1,7 +1,4 @@
-import {
-  default as React,
-  Component,
-} from "react";
+import React, { Component } from "react";
 
 import {
   ToastContainer,
@@ -18,7 +15,7 @@ export default class App extends Component {
   clearAlert = this.clearAlert.bind(this);
 
   addAlert() {
-    this.refs.container.success(`hi! Now is ${new Date()}`, `///title\\\\\\`, {
+    this.refs.container.success(`hi! Now is ${new Date()}`, `Title`, {
       closeButton: true,
     });
   }

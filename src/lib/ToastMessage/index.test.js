@@ -1,14 +1,8 @@
-import {
-  default as React,
-} from "react";
+import React from "react";
 
-import {
-  default as ReactDOM,
-} from "react-dom";
+import ReactDOM from "react-dom";
 
-import {
-  default as $,
-} from "jquery";
+import $ from "jquery";
 
 import {
   ToastMessage,

@@ -1,10 +1,6 @@
-import {
-  default as ToastContainer,
-} from "./ToastContainer";
+import ToastContainer from "./ToastContainer";
 
-import {
-  default as ToastMessage,
-} from "./ToastMessage";
+import ToastMessage from "./ToastMessage";
 
 export {
   ToastContainer,

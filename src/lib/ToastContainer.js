@@ -1,18 +1,8 @@
-import _ from "lodash";
-
-import {
-  default as React,
-  Component,
-  PropTypes,
-} from "react";
-
-import {
-  default as update,
-} from "react-addons-update";
-
-import {
-  default as ToastMessage,
-} from "./ToastMessage";
+import _, { merge } from "lodash";
+import React, { Component } from "react";
+import PropTypes from 'prop-types'
+import update from "react-addons-update";
+import ToastMessage from "./ToastMessage";
 
 export default class ToastContainer extends Component {
 
@@ -41,7 +31,7 @@ export default class ToastContainer extends Component {
     toastMessageFactory: React.createFactory(ToastMessage.animation),
     preventDuplicates: true,
     newestOnTop: true,
-    onClick() {},
+    onClick() { },
   };
 
   state = {
@@ -124,15 +114,16 @@ export default class ToastContainer extends Component {
   }
 
   _handle_toast_remove(toastId) {
+    const newState = merge({}, this.state)
     if (this.props.preventDuplicates) {
-      this.state.previousMessage = ``;
+      newState.previousMessage = ``;
     }
     const operationName = `${this.props.newestOnTop ? `reduceRight` : `reduce`}`;
-    this.state.toasts[operationName]((found, toast, index) => {
+    newState.toasts[operationName]((found, toast, index) => {
       if (found || toast.toastId !== toastId) {
         return false;
       }
-      this.setState(update(this.state, {
+      this.setState(update(newState, {
         toasts: { $splice: [[index, 1]] },
         messageList: { $splice: [[index, 1]] },
       }));

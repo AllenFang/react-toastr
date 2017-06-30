@@ -2,7 +2,7 @@
 
 ### Editor
 *.swp
-
+.vscode/
 ### Node ###
 # Logs
 logs
